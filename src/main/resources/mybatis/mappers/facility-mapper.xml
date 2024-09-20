@@ -95,5 +95,12 @@
 	        </choose>
 	</select>
 
-	
+
+    <select id="findAllFacilities" 
+        resultType="com.office.seoul.facility.FacilityDto">
+        
+	    SELECT * FROM 
+	        TBL_FACILITY
+	</select>
+
 </mapper>

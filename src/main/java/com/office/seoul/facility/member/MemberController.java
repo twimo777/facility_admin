@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.office.seoul.facility.FacilityDto;
+import com.office.seoul.facility.FacilityService;
 import com.office.seoul.facility.reservation.ReservationDto;
 import com.office.seoul.facility.reservation.ReservationService;
 
@@ -24,9 +26,13 @@ import lombok.extern.log4j.Log4j2;
 public class MemberController {
 
 	final private MemberService memberService;
+	final private ReservationService reservationService;
+	final private FacilityService facilityService;
 
-	public MemberController(MemberService memberService) {
+	public MemberController(MemberService memberService, ReservationService reservationService, FacilityService facilityService) {
 		this.memberService = memberService;
+		this.reservationService = reservationService;
+		this.facilityService = facilityService;
 	}
 
 	/*
@@ -241,7 +247,24 @@ public class MemberController {
 		
 	}
 	
-	
+	@GetMapping("/set_reservation_approval")
+	public String setReservationApproval(Model model) {
+		log.info("setReservationApproval()");
+		
+		String nextPage= "member/listup_reservations";
+		
+		
+		List<ReservationDto> reservationDtos = reservationService.setReservationApproval();
+		List<FacilityDto> facilityDtos = facilityService.getAllFacilities();
+		
+		model.addAttribute("reservations", reservationDtos);
+		model.addAttribute("facilities", facilityDtos);
+		
+	 	
+		
+		return nextPage;
+		
+	}
 	
 	
 	

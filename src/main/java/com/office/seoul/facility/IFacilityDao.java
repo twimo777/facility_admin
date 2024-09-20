@@ -27,6 +27,8 @@ public interface IFacilityDao {
 
 	public List<FacilityDto> findFacilitiesByIds(@Param("facilityIds") List<String> facilityIds);
 
+	public List<FacilityDto> findAllFacilities();
+
 
 
 }

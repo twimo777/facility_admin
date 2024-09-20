@@ -90,4 +90,9 @@ public class FacilityService {
 		return iFacilityDao.findFacilitiesByIds(facilityIds);
 	}
 
+	public List<FacilityDto> getAllFacilities() {
+		// TODO Auto-generated method stub
+		return iFacilityDao.findAllFacilities();
+	}
+
 }

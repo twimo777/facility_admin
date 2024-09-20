@@ -18,4 +18,6 @@ public interface IReservationDao {
 
 	List<ReservationDto> findReservationsByMemberId(@Param("u_m_id") String u_m_id);
 
+	List<ReservationDto> findAllReservations();
+
 }

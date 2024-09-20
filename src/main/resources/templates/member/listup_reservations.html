@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title th:replace="~{include/title.html::title}"></title>
+<link rel="stylesheet" th:href="@{/css/common/common.css}">
+<link rel="stylesheet" th:href="@{/css/common/header_nav_footer.css}">
+<link rel="stylesheet" th:href="@{/css/member/list.css}">
+</head>
+<body>
+
+    <header th:replace="~{/include/header_nav_footer.html::header}"></header>
+    
+    <nav th:replace="~{/include/header_nav_footer.html::nav}"></nav>
+
+    <section>
+    	<div id="section_wrap">
+    		<h2>전체 예약 리스트</h2><br>
+			<table>
+			    <thead>
+			        <tr>
+			            <th>예약자 이름</th>
+			            <th>시설 이름</th>
+			            <th>시설전화번호</th>
+			            <th>예약 날짜</th>
+			            <th>예약 시간</th>
+			            <th>예약 상태</th>
+			            <th>승인여부</th>
+			        </tr>
+			    </thead>
+ 			    <tbody>
+	                <tr th:each="reservation : ${reservations}">
+	        
+                        <td th:text="${reservation.u_m_id}">예약자 이름</td>
+                        <td th:each="item: ${facilities}"
+                        	th:if="${item.SVCID eq reservation.SVCID }"
+                        	th:text="${item.SVCNM}">시설이름
+                        </td>
+                        <td th:each="item: ${facilities}"
+                        	th:if="${item.SVCID eq reservation.SVCID }"
+                        	th:text="${item.TELNO}">전화번호
+                        </td>
+                        <td th:text="${reservation.r_reserve_date}">예약 날짜</td>
+                        <td th:text="${reservation.r_use_time}">예약 시간</td>
+                        <td th:text="${reservation.r_use_state}">예약 상태</td>
+                        <td>
+                        <th:block th:if="${reservation.r_use_state eq '예약대기'}">
+                        <button class="cancel_reservation"
+                                    th:data-reservation-id ="${reservation.r_use_state}">승인</button>
+                        
+                        </th:block>
+                        </td>
+                    </tr>
+			    </tbody>
+			</table>
+    	</div>
+    </section>
+
+    <footer th:replace="~{/include/header_nav_footer.html::footer}"></footer>
+
+  
+</body>
+</html>

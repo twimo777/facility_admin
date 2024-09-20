@@ -7,6 +7,7 @@ import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
+import com.office.seoul.facility.IFacilityDao;
 import com.office.seoul.facility.util.TimeConfig;
 
 import lombok.extern.log4j.Log4j2;
@@ -16,8 +17,9 @@ import lombok.extern.log4j.Log4j2;
 public class ReservationService {
 
 	private final IReservationDao iReservationDao;
+
 	
-	public ReservationService(IReservationDao iReservationDao) {
+	public ReservationService(IReservationDao iReservationDao, IFacilityDao iFacilityDao) {
 		this.iReservationDao = iReservationDao;
 	}
 
@@ -75,6 +77,12 @@ public class ReservationService {
 		log.info("getReservationsByMemberId() with u_m_id: {}", u_m_id);
 		
 		return iReservationDao.findReservationsByMemberId(u_m_id);
+	}
+
+	public List<ReservationDto>  setReservationApproval() {
+		log.info("setReservationApproval()");
+		return iReservationDao.findAllReservations();
+		
 	}
 
 }
