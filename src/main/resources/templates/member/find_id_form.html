@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>아이디 찾기</title>
+<script th:src="@{/js/find_idpw_form.js}"></script>
+<link rel="stylesheet" th:href="@{/css/member/find_form.css}">
+</head>
+<body>
+
+<section>
+    <div id="section_wrap">
+        <h3>아이디 찾기</h3>
+        <p class="info-text">입력된 정보로 아이디가 조회됩니다.</p>
+        
+        <form th:action="@{/member/find_id_confirm}" name="find_id_form" method="post">
+            <input type="text" name="a_m_name" placeholder="이름">
+            <input type="text" name="a_m_mail" placeholder="메일 주소">
+            <input type="button" value="아이디 찾기" onclick="findId();">
+        </form>
+    </div>
+</section>
+
+</body>
+</html>

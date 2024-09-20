@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title th:replace="~{/include/title.html::title}"></title>
+<!-- <link rel="stylesheet" th:href="@{/css/facility/facility.css}"> -->
+<link rel="stylesheet" th:href="@{/css/common/common.css}">
+<link rel="stylesheet" th:href="@{/css/common/header_nav_footer.css}">
+<link rel="stylesheet" th:href="@{/css/member/create_account.css}">
+<script th:src="@{/js/create_account_form.js}"></script>
+</head>
+<body>
+
+    <header th:replace="~{/include/header_nav_footer.html::header}"></header>
+    
+    <nav th:replace="~{/include/header_nav_footer.html::nav}"></nav>
+
+
+    <section>
+    	<div id="section_wrap">
+    		<h3>관리자 계정생성</h3><br>
+    	
+         <div>
+        	<form th:action="@{/member/create_account_confirm}" 
+        			name="create_account_form" 
+        			method="post">
+        		<input type="text" name="a_m_id" placeholder="ID"><br>
+				<input type="password" name="a_m_pw" placeholder="비밀번호"><br>
+        		<input type="text" name="a_m_name" placeholder="이름"><br>
+        		<select name="a_m_gender">
+        			<option value="">성별</option>
+					<option value="M">남성</option>
+        			<option value="W">여성</option>
+        		</select><br>
+				<input type="email" name="a_m_mail" placeholder="이메일"><br>
+				<input type="text" name="a_m_phone" placeholder="휴대폰 번호"><br>
+				<input type="reset" value="초기화">
+				<input type="button" value="회원가입" onclick="createAccountForm();">
+        	</form>
+        </div>
+		
+		<div class="go_button">
+			<br> <br> 이미 계정이 있다면? <br> <a th:href="@{/member/member_login_form}">관리자 로그인 화면으로 이동 </a>
+		</div>
+		  </div>
+    </section>
+    
+    <footer th:replace="~{/include/header_nav_footer.html::footer}"></footer>
+
+</body>
+</html>

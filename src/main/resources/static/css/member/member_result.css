@@ -1,0 +1,60 @@
+/* 전체 section 스타일 */
+section {
+    width: 100%;
+    min-height: 50vh; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f4f4f9; 
+    padding: 40px 0;
+}
+
+section #section_wrap {
+    width: 100%;
+    max-width: 600px; 
+    text-align: center;
+    background-color: #fff; 
+    border-radius: 8px; 
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+    padding: 30px; 
+    box-sizing: border-box;
+}
+
+/* 메시지 스타일 */
+section #section_wrap .message p {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-bottom: 30px;
+}
+
+.success-message {
+    color: #4CAF50; 
+}
+
+.error-message {
+    color: #F44336; 
+}
+
+/* 버튼 스타일 */
+section #section_wrap .go_button {
+    margin-top: 20px;
+}
+
+section #section_wrap .go_button .button {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 5px;
+    font-size: 1em;
+    font-weight: bold;
+    color: #fff;
+    background-color: #378bee; 
+    border: none;
+    border-radius: 4px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease; 
+}
+
+section #section_wrap .go_button .button:hover {
+    background-color: #1e72d4; 
+}

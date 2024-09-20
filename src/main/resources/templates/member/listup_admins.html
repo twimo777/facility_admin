@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title th:replace="~{include/title.html::title}"></title>
+<link rel="stylesheet" th:href="@{/css/common/common.css}">
+<link rel="stylesheet" th:href="@{/css/common/header_nav_footer.css}">
+<link rel="stylesheet" th:href="@{/css/member/list.css}">
+</head>
+<body>
+
+    <header th:replace="~{/include/header_nav_footer.html::header}"></header>
+    
+    <nav th:replace="~{/include/header_nav_footer.html::nav}"></nav>
+
+    <section>
+        <div id="section_wrap">
+            <h3>ADMIN LIST</h3><br>
+
+  				<table>
+					<thead>
+						<tr>
+							<th>계정</th>
+							<th>이름</th>
+							<th>성별</th>
+							<th>이메일</th>
+							<th>휴대전화</th>
+							<th>승인</th>
+						</tr>
+					</thead>
+  				<tbody>
+					 <tr th:each="item : ${memberDtos}">
+                        <td th:text="${item.a_m_id}"></td>
+                        <td th:text="${item.a_m_name}"></td>
+                        <td th:text="${item.a_m_gender}"></td>
+                        <td th:text="${item.a_m_mail}"></td>
+                        <td th:text="${item.a_m_phone}"></td>
+                        <td>
+                            <div th:switch="${item.a_m_approval}">
+                                <a th:href="@{/member/set_admin_approval(a_m_no=${item.a_m_no})}"
+                                   th:case="0">승인처리</a>
+                                <span th:case="1">승인완료</span>
+  
+  			        </div>
+  			      </td>
+  			    </tr>
+  			  </tbody>
+  			</table>
+        </div>
+    </section>
+
+    <footer th:replace="~{/include/header_nav_footer.html::footer}"></footer>
+
+  
+</body>
+</html>

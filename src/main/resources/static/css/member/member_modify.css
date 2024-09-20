@@ -1,0 +1,66 @@
+section {
+    width: 100%;
+    height: 550px;
+    /* background-color: #dbe6f0; */
+    padding: 40px 0;
+}
+
+section #section_wrap {
+    width: 600px;
+    height: 500px;
+    margin: 0px auto;
+    text-align: center;
+
+}
+
+section #section_wrap form input {
+    width: 300px;
+    height: 40px;
+	margin: 7px;  
+    border: 1px solid #bebebe;
+    padding: 0 15px;
+	border-radius: 4px;
+	box-sizing: border-box;
+	line-height: 40px;
+	font-size: 1.0em;
+
+}
+
+section #section_wrap form select {
+	width: 300px;
+    height: 40px;
+	margin: 5px; 
+	border: 1px solid #bebebe;
+	border-radius: 4px;
+	padding: 0 15px;
+	box-sizing: border-box;
+	font-size: 1.0em;
+	
+}
+
+section #section_wrap form select  {
+  color: #757575;
+} 
+
+section #section_wrap form select option {
+  color: #000;
+} 
+
+
+section #section_wrap form input[type="button"]{
+	cursor: pointer;
+	width: 140px;
+	background-color: #495f74;
+	color: #fff;
+} 
+section #section_wrap form input[type="reset"]{
+	cursor: pointer;
+	width: 140px;
+} 
+
+
+section #section_wrap .go_button a {
+	
+	font-weight: bold;
+	color: #378bee;
+}

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+                   
+<mapper namespace="com.office.seoul.facility.reservation.IReservationDao">
+
+	<!-- 예약된 시간 조회 -->
+    <select id="findReservedTimes" parameterType="Map" resultType="String">
+        SELECT R_USE_TIME
+        FROM TBL_RESERVE_INFO
+        WHERE SVCID = #{facilityId}
+        AND R_RESERVE_DATE = #{selectedDate}
+        AND R_USE_STATE IN ('예약', '예약대기')
+    </select>
+    
+    <!-- 예약 확인  -->
+    <insert id="insertReservation" parameterType="Map">
+        INSERT INTO TBL_RESERVE_INFO (SVCID, U_M_ID, R_RESERVE_DATE, R_USE_STATE, R_USE_TIME)
+        VALUES (#{facilityId}, #{userId}, #{selectedDate}, '예약대기', #{selectedTime});
+    </insert>
+    
+    <!-- 특정 기간의 예약된 날짜 조회 -->
+	<select id="findAllReservedDates" parameterType="Map" resultType="Map">
+	    SELECT R_RESERVE_DATE, COUNT(*) AS reservation_count
+	    FROM TBL_RESERVE_INFO
+	    WHERE SVCID = #{id}
+      	AND R_RESERVE_DATE BETWEEN #{startDate} AND #{endDate}
+      	AND R_USE_STATE IN ('예약', '예약대기')
+	    GROUP BY R_RESERVE_DATE
+	</select>
+	
+	<!-- 예약 정보 조회 -->
+	<select id="findReservationsByMemberId" parameterType="String" resultType="com.office.seoul.facility.reservation.ReservationDto">
+        
+        SELECT * FROM 
+        	TBL_RESERVE_INFO
+		WHERE 
+			U_M_ID = #{u_m_id}
+		ORDER BY R_RESERVE_DATE ASC
+
+    </select>
+
+</mapper>

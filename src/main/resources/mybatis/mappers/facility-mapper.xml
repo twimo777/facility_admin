@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.office.seoul.facility.IFacilityDao">
+
+	<select id="getAllFacility" parameterType="String" resultType="com.office.seoul.facility.FacilityDto">
+		SELECT * FROM TBL_FACILITY
+		<where>
+	        <if test="type != null and type != ''">
+	            AND MINCLASSNM = #{type}
+	        </if>
+	    </where>
+	</select>
+	
+	<!-- 페이지별 데이터 조회 -->
+    <select id="getFacilities" parameterType="Map" resultType="com.office.seoul.facility.FacilityDto">
+        SELECT * FROM TBL_FACILITY
+        <where>
+	        <if test="type != null and type != ''">
+	            AND (
+                MINCLASSNM LIKE CONCAT('%', #{type}, '%')
+                OR PLACENM LIKE CONCAT('%', #{type}, '%')
+                OR AREANM LIKE CONCAT('%', #{type}, '%')
+            )
+	        </if>
+	    </where>
+        LIMIT #{offset}, #{size}
+    </select>
+    
+    <!-- 전체 시설 수 조회 -->
+    <select id="getTotalFacilitiesCount" parameterType="Map" resultType="Integer">
+        SELECT COUNT(*) FROM TBL_FACILITY
+        <where>
+	        <if test="type != null and type != ''">
+	            AND (
+                MINCLASSNM LIKE CONCAT('%', #{type}, '%')
+                OR PLACENM LIKE CONCAT('%', #{type}, '%')
+                OR AREANM LIKE CONCAT('%', #{type}, '%')
+            )
+	        </if>
+	    </where>
+    </select>
+    
+    <!-- 시설 상세정보 -->
+	<select id="getFacilityById" parameterType="String" resultType="com.office.seoul.facility.FacilityDto">
+		SELECT * FROM TBL_FACILITY WHERE SVCID = #{id}	
+	</select>
+	
+	<!-- 홈 빠른 예약 -->
+	<select id="getAreas" resultType="String">
+        SELECT DISTINCT AREANM FROM TBL_FACILITY
+    </select>
+
+    <select id="getCategoriesByArea" parameterType="String" resultType="String">
+        SELECT DISTINCT MINCLASSNM FROM TBL_FACILITY
+        WHERE AREANM = #{area}
+    </select>
+
+    <!-- 지역 및 카테고리 기반 결과 조회 -->
+    <select id="getResults" parameterType="Map" resultType="String">
+        SELECT DISTINCT SVCNM FROM TBL_FACILITY WHERE SVCSTATNM = '안내중' OR SVCSTATNM = '접수중'
+        <where>
+            <if test="area != null and area != ''">
+                AND AREANM = #{area}
+            </if>
+            <if test="category != null and category != ''">
+                AND MINCLASSNM = #{category}
+            </if>
+        </where>
+    </select>
+    
+    <!-- 빠른 예약 SVCNM 으로 찾기 -->
+    <select id="getFacilityIdBySvcnm" parameterType="String" resultType="String">
+    	SELECT SVCID FROM TBL_FACILITY WHERE SVCNM = #{svcnm};
+	</select>
+
+    <select id="findFacilitiesByIds" 
+        parameterType="list" 
+        resultType="com.office.seoul.facility.FacilityDto">
+        
+	    SELECT * FROM 
+	        TBL_FACILITY
+	    WHERE 
+	        <choose>
+	            <when test="facilityIds != null and !facilityIds.isEmpty()">
+	                SVCID IN
+	                <foreach item="facilityId" index="index" collection="facilityIds" open="(" separator="," close=")">
+	                    #{facilityId}
+	                </foreach>
+	            </when>
+	            <otherwise>
+	                1 = 0 <!-- 빈 리스트에 대해 항상 false 반환 => 아무것도 조회하지 않음 -->
+	            </otherwise>
+	        </choose>
+	</select>
+
+	
+</mapper>

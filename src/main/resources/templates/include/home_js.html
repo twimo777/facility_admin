@@ -1,0 +1,123 @@
+<script th:fragment="js">
+
+// 랜더링 시작
+$(document).ready(function() {
+    console.log('DOCUMENT READY');
+    
+    function updateOptions(area = '', category = '') {
+        // 현재 선택된 값 저장
+        let currentArea = $('#AREANM').val();
+        let currentCategory = $('#MINCLASSNM').val();
+
+        console.log('Sending area:', area); 
+        console.log('Sending category:', category); 
+
+        // ajax 시작
+        $.ajax({
+            url: '/facility/options',
+            method: 'GET',
+            data: {
+                area: area,
+                category: category
+            },
+            dataType: 'json',
+            success: function(data) {
+                console.log('data:', data); 
+                let areaSelect = $('#AREANM');
+                let categorySelect = $('#MINCLASSNM');
+                let resultSelect = $('#SVCNM');
+
+                // 지역값 업데이트
+                areaSelect.empty();
+                areaSelect.append('<option value="">선택</option>');
+                if (Array.isArray(data.areas)) {
+                    $.each(data.areas, function(index, area) {
+                        areaSelect.append(`<option value="${area}">${area}</option>`);
+                    });
+                } else {
+                    console.error('Invalid data format for areas:', data.areas);
+                }
+
+                // 카테고리값 업데이트
+                categorySelect.empty();
+                if (currentArea) {
+                    categorySelect.append('<option value="">선택 (' + (data.categories ? data.categories.length : 0) + ')</option>');
+                } else {
+                    categorySelect.append('<option value="">선택</option>');
+                }
+                if (Array.isArray(data.categories)) {
+                    $.each(data.categories, function(index, category) {
+                        categorySelect.append(`<option value="${category}">${category}</option>`);
+                    });
+                } else {
+                    console.error('Invalid data format for categories:', data.categories);
+                }
+
+                // 결과값 업데이트
+                resultSelect.empty();
+                if (currentArea && currentCategory) {
+                    resultSelect.append('<option value="">선택 (' + (data.results ? data.results.length : 0) + ')</option>');
+                } else {
+                    resultSelect.append('<option value="">선택</option>');
+                }
+                if (Array.isArray(data.results)) {
+                    $.each(data.results, function(index, result) {
+                        resultSelect.append(`<option value="${result}">${result}</option>`);
+                    });
+                } else {
+                    console.error('Invalid data format for results:', data.results);
+                }
+
+                // 선택된 값을 다시 설정
+                areaSelect.val(currentArea);
+                categorySelect.val(currentCategory);
+            },
+            error: function(xhr, status, error) {
+                console.error('옵션 데이터를 가져오는 데 실패했습니다:', error);
+            }
+        });
+    }
+
+    // 기본옵션
+    updateOptions();
+
+    // area 드롭다운 변경 시
+    $('#AREANM').change(function() {
+        let selectedArea = $(this).val();
+        let selectedCategory = $('#MINCLASSNM').val();
+        updateOptions(selectedArea, selectedCategory);
+    });
+
+    // category 드롭다운 변경 시
+    $('#MINCLASSNM').change(function() {
+        let selectedArea = $('#AREANM').val();
+        let selectedCategory = $(this).val();
+        updateOptions(selectedArea, selectedCategory);
+    });
+    
+    $('#quick_btn').click(function() {
+        let selectedResult = $('#SVCNM').val();
+        console.log('Selected Result:', selectedResult); // 선택된 값 로그
+
+        $.ajax({
+            url: '/facility/quickReserved',
+            method: 'GET',
+            data: {
+                svcnm: selectedResult
+            },
+            success: function(response) {
+                console.log('Response:', response); // 응답 로그
+                if (response.redirectUrl) {
+                    window.location.href = response.redirectUrl;
+                } else {
+                    alert('해당 시설 예약이 종료되었습니다.');
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error('시설 ID를 가져오는 데 실패했습니다:', error);
+            }
+        });
+    });
+    
+});
+</script>

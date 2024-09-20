@@ -1,0 +1,82 @@
+/* 전체 섹션 스타일 */
+section {
+    width: 100%;
+    min-height: 70%;
+    padding: 40px 0;
+    background-color: #f4f4f4; 
+}
+
+section #section_wrap {
+    width: 600px;
+    margin: 0 auto;
+    padding: 30px;
+    background-color: #fff; 
+    border-radius: 8px; 
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+    text-align: center;
+}
+
+/* 제목 스타일 */
+section #section_wrap h3 {
+    font-size: 24px;
+    color: #333; 
+    margin-bottom: 20px; 
+}
+
+/* 폼 입력 스타일 */
+section #section_wrap form input,
+section #section_wrap form select {
+    width: 300px;
+    height: 40px;
+    margin: 7px 0; 
+    border: 1px solid #bebebe;
+    padding: 0 15px;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 1.0em;
+}
+
+/* 로그인 버튼 스타일 */
+section #section_wrap form input[type="button"] {
+    cursor: pointer;
+    width: 150px; 
+    height: 40px; 
+    background-color: #495f74;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 0.9em; 
+    font-weight: bold;
+    text-align: center; 
+    line-height: 40px; 
+}
+
+section #section_wrap form input[type="button"]:hover {
+    background-color: #3a4d62; 
+}
+
+/* 리셋 버튼 스타일 */
+section #section_wrap form input[type="reset"] {
+    cursor: pointer;
+    width: 150px; 
+    height: 40px; 
+    border: 1px solid #bebebe;
+    border-radius: 4px;
+    background-color: #fff; 
+    color: #495f74; 
+}
+
+/* 링크와 버튼 스타일 */
+section #section_wrap .go_button {
+    margin-top: 30px; 
+}
+
+section #section_wrap .go_button a {
+    font-weight: bold;
+    color: #378bee; 
+    text-decoration: none; 
+}
+
+section #section_wrap .go_button a:hover {
+    text-decoration: underline; 
+}

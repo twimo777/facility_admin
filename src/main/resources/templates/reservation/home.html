@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+
+<title th:replace="~{/include/title.html::title}"></title>
+
+<link rel="stylesheet" th:href="@{/css/common/common.css}">
+<link rel="stylesheet" th:href="@{/css/common/header_nav_footer.css}">
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+</head>
+<body>
+
+<header th:replace="~{/include/header_nav_footer.html::header}"></header>
+<nav th:replace="~{/include/header_nav_footer.html::nav}"></nav>
+<article th:replace="~{/include/header_nav_footer.html::article}"></article>
+
+<section>
+	<div>
+		<h3>Reservation</h3>
+	</div>
+</section>
+
+<footer th:replace="~{/include/header_nav_footer.html::footer}"></footer>
+
+</body>
+</html>

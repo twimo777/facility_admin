@@ -1,0 +1,42 @@
+<script th:fragment="js" th:inline="javascript">
+
+$(document).ready(function() {
+    console.log('DOCUMENT READY');
+
+    // 전체 시간, 예약시간 불러오기
+    const allTimes = /*[[${allTimes}]]*/ [];
+    let reservedTimes = /*[[${reservedTimes}]]*/ [];
+
+    // 예약 시간이 없다면 빈 배열 처리
+    if (reservedTimes === null) {
+        reservedTimes = [];
+    }
+
+    console.log('allTimes', allTimes);
+    console.log('reservedTimes', reservedTimes);
+
+    // 예약되지 않은 시간 목록 필터링
+    const availableTimes = allTimes.filter(time => !reservedTimes.includes(time));
+
+    // 시간 옵션
+    const timeSelect = $('#selectedTime');
+    availableTimes.forEach(time => {
+        timeSelect.append(new Option(time, time));
+    });
+
+    // 예약 확정 버튼 핸들러
+    $('#time_select_form').on('submit', function(event) {
+        console.log('FORM SUBMIT CLICK');
+
+        
+        const selectedTime = $('#selectedTime').val();
+
+        if (!selectedTime) {
+            alert('시간을 선택해 주세요.');
+            event.preventDefault(); 
+            return;
+        }
+    });
+});
+
+</script>

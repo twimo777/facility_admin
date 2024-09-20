@@ -1,0 +1,188 @@
+<script th:fragment="js" th:inline="javascript">
+
+$(document).ready(function() {
+    console.log('DOCUMENT READY');
+
+    let currentYear = new Date().getFullYear();
+    let currentMonth = new Date().getMonth();
+    const maxMonth = 2; // 최대 2개월까지 이동 허용
+
+    // 현재 날짜 객체
+    const now = new Date();
+
+    // 현재 날짜 기준으로 지난 날들 예약불가 처리 함수
+    function isPastDate(year, month, day) {
+        const date = new Date(year, month, day);
+        return date < now;
+    }
+
+    // 예약 상태 데이터
+    const reservationStatus = /*[[${reservationStatus}]]*/ {};
+    console.log('Reservation Status:', reservationStatus); // 데이터 확인
+    const loginedMemberDto = /*[[${loginedMemberDto}]]*/ {};
+    console.log('loginedMemberDto:', loginedMemberDto);
+
+    // 달력 생성
+    function generateCalendar(year, month) {
+        const calendarDate = $('#calendar_date');
+        const calendarMonth = $('#calendar_month');
+
+        // 해당 월의 총 일수, 첫번째 일의 요일 계산
+        const daysInMonth = new Date(year, month + 1, 0).getDate();
+        const firstDay = new Date(year, month, 1).getDay();
+
+        // 월 표시
+        const monthNames = ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'];
+        calendarMonth.text(`${year}년 ${monthNames[month]}`);
+
+        let rows = '';
+        let day = 1;
+
+        // 달력 테이블 UI(<tr> <td> 생성)
+        for (let i = 0; i < 6; i++) {
+            let row = '<tr>';
+
+            for (let j = 0; j < 7; j++) {
+                if (i === 0 && j < firstDay) {
+                    row += '<td></td>';
+                } else if (day > daysInMonth) {
+                    row += '<td></td>';
+                } else {
+                    const isPast = isPastDate(year, month, day);
+                    const dateStr = `${year}-${(month + 1).toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
+
+                    // 예약 상태 확인
+                    const isReserved = reservationStatus[dateStr] >= 6 ? true : false; // `true` 값 확인
+                    const cellContent = isPast 
+                        ? `<span>${day}<br><span>&nbsp;&nbsp;&nbsp;</span>` 
+                        : isReserved 
+                            ? `${day}<br><span></span>` 
+                            : reservationStatus[dateStr] == undefined 
+                            ? `${day}<br><span>&nbsp;&nbsp;&nbsp;</span>`
+                            :`<a href="#none" class="date-cell"><span>${day}</span><br><span>(${reservationStatus[dateStr]}/6)</span></a>`;
+
+                    row += `<td>${cellContent}</td>`;
+                    day++;
+                }
+            }
+
+            row += '</tr>';
+            rows += row;
+
+            // 날이 끝나는 열에서 테이블 생성 중단
+            if (day > daysInMonth) {
+                const cells = row.match(/<td>/g) || [];
+                if (cells.length < 7) {
+                    // 모든 테이블 셀이 생성이 안 된 경우 마지막 행 제거 로직
+                    rows = rows.replace(/<tr>[\s\S]*<\/tr>$/, '');
+                }
+                break;
+            }
+        }
+
+        // 달력에 일 추가
+        calendarDate.html(rows);
+    }
+    
+    // 달력 업데이트
+    function updateCalendar() {
+        generateCalendar(currentYear, currentMonth);
+        navBtn();
+    }
+
+    // 달력 네비 버튼 상태 (활성화 / 비활성화) 함수
+    function navBtn() {
+        // 최대 허용 년, 월 설정
+        const maxAllowedYear = now.getFullYear();
+        let maxAllowedMonth = now.getMonth() + maxMonth;
+
+        if (maxAllowedMonth > 11) {
+            maxAllowedMonth -= 12;
+            maxAllowedYear++;
+        }
+
+        const nextMonth = (currentYear > maxAllowedYear) || (currentYear === maxAllowedYear && currentMonth > maxAllowedMonth);
+        $('#next_month').toggle(!nextMonth);
+
+        const prevMonth = (currentYear === now.getFullYear() && currentMonth === now.getMonth());
+        $('#pre_month').toggle(!prevMonth);
+    }
+
+    // 이전 달 버튼
+    $('#pre_month').click(function(event) {
+        console.log('PRE_MONTH BTN CLICK');
+        event.preventDefault(); 
+        if (currentYear === now.getFullYear() && currentMonth === now.getMonth()) {
+            return;
+        }
+
+        currentMonth--;
+        if (currentMonth < 0) {
+            currentMonth = 11;
+            currentYear--;
+        }
+        updateCalendar();
+    });
+
+    // 다음 달 버튼
+    $('#next_month').click(function(event) {
+        console.log('NEXT_MONTH BTN CLICK');
+        event.preventDefault(); 
+        const maxAllowedYear = now.getFullYear();
+        let maxAllowedMonth = now.getMonth() + maxMonth;
+
+        if (maxAllowedMonth > 11) {
+            maxAllowedMonth -= 12;
+            maxAllowedYear++;
+        }
+
+        if (currentYear < maxAllowedYear || (currentYear === maxAllowedYear && currentMonth < maxAllowedMonth)) {
+            currentMonth++;
+            if (currentMonth > 11) {
+                currentMonth = 0;
+                currentYear++;
+            }
+            updateCalendar();
+        }
+    });
+
+    // 날짜 클릭 이벤트
+    $(document).on('click', '.date-cell', function(event) {
+        console.log('DATE BTN CLICK');
+        event.preventDefault();
+        const day = $(this).text().split('(')[0];
+        const selectedDate = `${currentYear}-${(currentMonth + 1).toString().padStart(2, '0')}-${day.padStart(2, '0')}`;
+        $('#selectedDate').val(selectedDate);
+        $('.date-cell').removeClass('selected');
+        $(this).addClass('selected');
+        console.log(`Selected Date: ${selectedDate}`); 
+    });
+
+    $('#reservation_button').click(function() {
+        console.log('RESERVATION BTN CLICK');
+        console.log('RESERVATION BTN CLICK  ', $('#selectedDate').val());
+        const selectedDate = $('#selectedDate').val();
+
+        const loginedMemberDto = /*[[${loginedMemberDto}]]*/ {};
+        console.log('loginedMemberDto:', loginedMemberDto);
+        
+        if(!loginedMemberDto){
+        	alert('로그인이 필요합니다. 로그인 페이지로 이동합니다.');
+            window.location.href = '/member/member_login_form'; 
+            return;
+        }
+        
+        if (!selectedDate) {
+            alert('날짜를 선택해주세요.');
+            return;
+        }
+
+        $('#reservation_form').submit();
+    });
+
+    // 초기 달력 생성
+    updateCalendar();
+    
+});
+
+</script>

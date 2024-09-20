@@ -1,0 +1,333 @@
+/* 전체 페이지 스타일 */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+  /*   background-color: #f4f4f4; */
+}
+
+.container {
+    width: 90%;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+/* 테이블 스타일 */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+thead {
+    background-color: #007bff;
+    color: #fff;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+/* 이미지 스타일 */
+.facility-image {
+    width: 100px;
+    height: auto;
+    border-radius: 4px;
+}
+
+/* 페이지네이션 스타일 */
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
+}
+
+.pagination-button {
+    display: inline-flex;
+    align-items: center;
+    background-color: #007bff;
+    color: #fff;
+    text-decoration: none;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    margin: 0 5px;
+    font-size: 16px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.pagination-button i {
+    margin: 0 5px;
+}
+
+.pagination-button:hover {
+    background-color: #0056b3;
+    color: #fff;
+}
+
+.prev-button {
+    font-weight: bold;
+}
+
+.next-button {
+    font-weight: bold;
+}
+
+.pagination-info {
+    margin: 0 15px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+
+/* 여기서 부터 리스트 시작 */
+
+
+ section {
+    width: 100%;
+	padding: 10px 0;
+} 
+ 
+
+ section #section_wrap {
+	width: 1300px;
+	margin: 0 auto;
+	
+	}
+
+
+	
+	
+
+ section #section_wrap .search_form form {
+
+	width: 1080px;
+	height: 50px;
+	background-color: rgba(225, 230, 248, 0.8);
+	margin: 50px auto;
+	padding: 40px;
+	border-radius: 20px;
+	text-align: center;
+	
+ }
+
+
+
+ section #section_wrap .search_form form select {
+	width: 200px;
+	height: 50px;
+	padding: 15px;
+	font-size: 1.1em;
+	text-align: center;
+	margin-right: 20px;
+	border: 1px solid #c5cdd3;
+	border-radius: 5px;
+	box-sizing: border-box;
+	outline: none;
+ }
+
+
+ section #section_wrap .search_form form input {
+	width: 300px;
+	height: 50px;
+	padding: 15px;
+	text-align: left;
+	font-size: 1.1em;
+	margin-right: 20px;
+	border: 1px solid #c5cdd3;
+	border-radius: 5px;
+	box-sizing: border-box;
+	outline: none;
+	
+ } 
+
+ section #section_wrap .search_form button {
+	height: 50px;
+	width: 200px;
+	padding: 15px;
+	margin-right: 20px;
+	background-color: #495f74;
+	color: #fff;
+	border: 1px solid #c0c0c0;
+	border-radius: 5px;
+	box-sizing: border-box;
+	outline: none;
+	text-align: center;
+	font-size: 1.1em;
+	line-height: 18px;
+
+ }
+
+ section #section_wrap .s_result > ul {
+
+	display:flex;
+	justify-content: left;
+ }
+
+ section #section_wrap  .result_count {
+	font-size: 1.2em;
+	margin-left: 10px;
+ }
+
+ section #section_wrap .result_count span {
+	color: #f55260;
+	padding: 0 5px;
+
+ }
+
+
+ section #section_wrap .s_result .show_list .result_wrap {
+	float: left;
+	margin: 30px 20px;
+	width: 30%; height: 620px;
+	border: 1px solid #cccccc;
+	border-radius: 10px;
+	box-sizing: border-box;
+	background-size: cover;
+	font-size: 1.05em;
+	overflow: hidden;
+	position: relative;
+	cursor: pointer;
+ }
+
+ section #section_wrap .s_result .show_list .result_wrap .img_box {
+	width: 400px;
+	height: 245px;
+	overflow: hidden;
+ }
+
+
+ section #section_wrap .s_result .show_list .result_wrap .img_box .thumb {
+	width: 100%;
+	height: 100%;
+	object-fit: cover; /* 이미지를 div 크기에 맞게 조정 */
+	transition: transform 0.5s ease; 
+
+
+ }
+
+
+ section #section_wrap .s_result .show_list .result_wrap:hover .thumb {
+	transform: scale(1.1); 
+	
+ }
+
+
+ section #section_wrap .s_result .show_list .result_wrap:hover {
+	border: 1px solid #1a1a1a;
+
+ }
+
+
+
+
+
+ section #section_wrap .s_result .show_list .result_wrap .img_box .ib_top {
+
+	position: absolute;
+	top: 15px;
+	left: 15px;
+
+ }
+
+
+ section #section_wrap .s_result .show_list .result_wrap .img_box .ib_top span {
+	display: inline-block;
+	padding: 0 8px;
+	height: 30px;
+	border-radius: 5px;
+	line-height: 30px;
+	color: #fff;
+	text-align: center;
+	font-weight: bold;
+	font-size: 0.9em;
+
+ }
+ 
+  section #section_wrap .s_result .show_list .result_wrap .img_box .ib_top .status1 {
+  	background-color: #f8981a;
+  }
+ 
+   section #section_wrap .s_result .show_list .result_wrap .img_box .ib_top .status2 {
+  	background-color: #000;
+  }
+
+ section #section_wrap .s_result .show_list .result_wrap .img_box .ib_top .type1 {
+	background-color: #4b94da;
+	
+ }
+
+ section #section_wrap .s_result .show_list .result_wrap .img_box .ib_top .type2 {
+	background-color: #f55260;
+	
+ }
+
+ section #section_wrap .s_result .show_list .result_wrap .text_wrap {
+	line-height: 2em;
+	padding: 20px;
+
+ }
+
+ section #section_wrap .s_result .show_list .result_wrap .text_wrap p {
+	font-weight: bold;
+	color: #047ad5;
+ }
+
+ section #section_wrap .s_result .show_list .result_wrap .text_wrap h3 {
+	font-size: 1.1em;
+ 	height: 3em
+ }
+
+
+
+ section #section_wrap .s_result .show_list .result_wrap .text_wrap ul span {
+	font-weight: 600;
+	color: #047ad5;
+ } 
+ 
+ section #section_wrap .s_result .show_list .result_wrap .text_wrap ul li img {
+
+	line-height: 5px;
+ }
+
+/* 상세보기 버튼  */
+ section #section_wrap .s_result .show_list .result_wrap .text_wrap input[type="button"]{
+	padding: 10px 15px;
+	background-color: #495f74;
+	color: #fff;
+	border: 1px solid #c0c0c0;
+	border-radius: 30px;
+	width: 120px;
+	outline: none;
+	text-align: center;
+	font-weight: bold;
+	line-height: 18px;
+	font-size: 0.9em;
+ } 
+
+
+

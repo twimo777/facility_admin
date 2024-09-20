@@ -1,0 +1,237 @@
+
+
+ section {
+    width: 100%;
+   padding: 10px 0;
+} 
+ 
+
+ section #section_wrap {
+   width: 1200px;
+   margin: 20px auto;
+   
+   }
+
+
+   section #section_wrap .detail_title {
+
+      margin-bottom: 50px;
+   }
+
+
+ section #section_wrap .detail_title > h2 {
+    margin: 5px 20px ;
+    font-size: 1.5em;
+   display: inline;
+
+ }      
+
+ section #section_wrap .detail_title span {
+   
+   display: inline-block;
+   width: 70px; height: 30px;
+   border-radius: 5px;
+   line-height: 30px;
+   color: #fff;
+   text-align: center;
+   font-weight: bold;
+
+ }
+
+ section #section_wrap .detail_title .status1 {
+    background-color: #f8981a;
+ }
+ section #section_wrap .detail_title .status2 {
+    background-color: #000;
+ }
+
+
+ section #section_wrap .left_box .thumb {
+   width: 550px;
+   height: 350px;
+   overflow: hidden;
+   margin-bottom: 20px;
+ }
+
+ section #section_wrap > ul  {
+
+   display:flex;
+   justify-content: space-around;
+ }  
+
+
+
+
+ section #section_wrap .left_box .thumb img {
+   width: 100%;
+   height: 100%;
+   border-radius: 20px;
+
+ }
+
+
+ section #section_wrap .left_box .calendar {
+   width: 550px;
+   height: 450px;
+   
+   overflow: hidden;
+ }
+
+ section #section_wrap .left_box .calendar table {
+   background-color: #ffffff;
+   table-layout: fixed;
+   margin: 20px auto;
+   border: 1px solid #bebebe;
+   border-collapse: collapse;
+   width: 100%;
+   height: 350px;
+   table-layout: fixed;
+   border-radius: 5px;
+ }
+
+ section #section_wrap .left_box .calendar h3 {
+   display: block;
+   padding: 5px;
+   background-color: #e5e5e5;
+   text-align: center;
+ }
+
+
+ section #section_wrap .left_box .calendar table td {
+
+   border: 1px solid #bebebe;
+   font-size: 1.1em;
+   text-align: center;
+   height: 50px;
+ }
+
+ section #section_wrap .left_box .calendar table th {
+   border: 1px solid #bebebe;
+   height: 60px;
+   font-size: 0.9em;
+   background-color: #e1f4fd;
+   text-align: center;
+ }
+
+
+ section #section_wrap .right_box {
+   width: 560px;
+   height: 750px;
+   padding: 10px;
+   border: 1px dotted #bebebe;
+ }
+
+ section #section_wrap .right_box ul li {
+   border-bottom: 1px dotted #bebebe;
+   font-size: 1.1em;
+   line-height: 3.7em;
+   padding-left: 30px; 
+    word-wrap: break-word; /* 단어가 길면 강제 줄바꿈 */
+    overflow: hidden; /* 넘치는 텍스트 숨김 */
+
+}
+
+section #section_wrap .right_box ul li:nth-child(2) span {
+   width: 430px;
+   padding: 0 5px;
+   float: right;
+   display: inline-block;
+   line-height: 1.9em;
+   
+}
+
+section #section_wrap .right_box ul li:nth-child(2) span.line1 {
+   
+   line-height: 3.7em;
+}
+
+section #section_wrap .right_box ul li:nth-child(10) span {
+   width: 430px;
+   padding: 0 5px;
+   float: right;
+   display: inline-block;
+   line-height: 1.9em;
+   
+}
+
+section #section_wrap .right_box ul li:nth-child(10) span.line1 {
+   
+   line-height: 3.7em;
+}
+
+
+
+section #section_wrap .right_box .reservation_apply {
+   margin-top: 20px;
+   margin-left: 30px;
+   width: 200px;
+   height: 50px;
+   border-radius: 10px;
+   cursor: pointer;
+   font-size: 1.1em;
+   background-color: #495f74;
+   outline: none;
+   border: 1px solid #dadada;
+   color: #fff;
+   font-weight: bold;
+}
+
+
+ /* 탭 css  */
+
+   .tab {
+            display: flex;
+        }
+        .tab button {
+            background-color: #f1f1f1;
+            border: 1px solid #ccc ;
+            height: 60px;
+            padding: 10px;
+            cursor: pointer;
+            width: 100%;
+            text-align: center;
+            font-size: 1.1em;
+            font-weight: bold;
+            color: #495f74;
+        }
+        
+        .tab button:nth-child(1) {
+        border-radius: 15px 0 0 0 ;
+        }
+        .tab button:nth-child(3) {
+        border-radius:  0  15px  0 0 ;
+        }
+        
+        .tab button:hover {
+            background-color: #f5f7f9;
+            border: 2px solid #00afee;
+        }
+        .tab button.active {
+             background-color: #fff;
+            border: 2px solid #00afee;
+        }
+        .tab-content {
+            display: none;
+            padding: 10px;
+            border-top: none;
+        }
+        
+        .tab-content h3 {
+        display: hidden;
+        
+        }
+        
+        .tab-content p {
+         width: 1180px;
+         padding: 10px;
+         font-size: 1.1em;
+         outline-style: none;
+         line-height: 1.8em;
+         }
+        
+        
+        
+        .tab-content.active {
+            display: block;
+        }
+ 

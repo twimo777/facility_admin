@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+
+<title th:replace="~{/include/title.html::title}"></title>
+
+<link rel="stylesheet" th:href="@{/css/common/common.css}">
+<link rel="stylesheet" th:href="@{/css/common/header_nav_footer.css}">
+<link rel="stylesheet" th:href="@{/css/reservation/confirm.css}">
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+</head>
+<body>
+
+<header th:replace="~{/include/header_nav_footer.html::header}"></header>
+<nav th:replace="~{/include/header_nav_footer.html::nav}"></nav>
+<article th:replace="~{/include/header_nav_footer.html::article}"></article>
+
+<section>
+    <div id="section_wrap">
+        <h2>예약 결과</h2>
+        <p class="result-message" th:if="${isSaved}">
+            예약이 완료되었습니다!
+        </p>
+        <p class="result-message" th:if="${!isSaved}">
+            예약에 실패했습니다. 다시 시도해 주세요.
+        </p>
+        <div class="result-details" th:if="${isSaved}">
+            <p><strong th:text="${userId}"></strong><strong>님의 예약정보 </strong> </p>
+            <p><strong>예약일 : </strong> <span th:text="${selectedDate}"></span></p>
+            <p><strong>이용 예약 시간 : </strong> <span th:text="${selectedTime}"></span></p>
+        </div>
+        <a class="home-link" th:href="@{/}">홈으로 돌아가기</a>
+    </div>
+</section>
+
+<footer th:replace="~{/include/header_nav_footer.html::footer}"></footer>
+
+</body>
+</html>

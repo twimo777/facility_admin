@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+                   
+<mapper namespace="com.office.seoul.facility.member.IMemberDao">
+
+	<select id="isMember" 
+			parameterType="String" 
+			resultType="Boolean">
+	
+		SELECT COUNT(*) FROM 
+			TBL_ADMIN_MEMBER 
+		WHERE 
+			A_M_ID = #{a_m_id}
+			
+	</select>
+	
+	<insert id="insertMember" 
+			parameterType="com.office.seoul.facility.member.MemberDto">
+	
+		INSERT INTO 
+			TBL_ADMIN_MEMBER(A_M_ID, A_M_PW, A_M_NAME, A_M_GENDER, A_M_MAIL, A_M_PHONE) 
+		VALUES(#{a_m_id}, #{a_m_pw}, #{a_m_name}, #{a_m_gender}, #{a_m_mail}, #{a_m_phone})
+	
+	</insert>
+	
+	<select id="selectMemberByMId"
+			parameterType="String"
+			resultType="com.office.seoul.facility.member.MemberDto">
+	
+		SELECT * FROM 
+			TBL_ADMIN_MEMBER 
+		WHERE 
+			A_M_ID = #{a_m_id}
+	
+	</select>
+	
+	<select id="getLoginedMemberByAmId"
+			parameterType="String"
+			resultType="com.office.seoul.facility.member.MemberDto">
+	
+		SELECT * FROM 
+			TBL_ADMIN_MEMBER 
+		WHERE 
+			A_M_ID = #{a_m_id}
+	
+	</select>
+	
+	<update id="updateMemberModify"
+			parameterType="com.office.seoul.facility.member.MemberDto">
+	
+		UPDATE 
+			TBL_ADMIN_MEMBER 
+		SET 
+			A_M_PW = #{a_m_pw}, A_M_NAME = #{a_m_name}, 
+			A_M_GENDER = #{a_m_gender}, A_M_MAIL = #{a_m_mail}, 
+			A_M_PHONE = #{a_m_phone}, A_M_MOD_DATE = NOW() 
+		WHERE 
+			A_M_NO = #{a_m_no}
+	
+	</update>
+	
+	<delete id="deleteMemberByMId"
+			parameterType="com.office.seoul.facility.member.MemberDto">
+	
+		DELETE FROM 
+			TBL_ADMIN_MEMBER 
+		WHERE 
+			A_M_ID = #{a_m_id}
+	
+	</delete>
+	
+	<select id="selectForFindId" 
+			parameterType="map" 
+			resultType="com.office.seoul.facility.member.MemberDto">
+	
+		SELECT 
+			A_M_ID 
+		FROM 
+			TBL_ADMIN_MEMBER 
+		WHERE 
+			A_M_NAME = #{a_m_name} AND A_M_MAIL = #{a_m_mail}
+	
+	</select>
+
+	<select id="selectForFindPassword" 
+			parameterType="map" 
+			resultType="com.office.seoul.facility.member.MemberDto">
+	
+		SELECT * FROM 
+			TBL_ADMIN_MEMBER 
+		WHERE 
+			A_M_ID = #{a_m_id} AND A_M_NAME = #{a_m_name} 
+			AND A_M_MAIL = #{a_m_mail}
+	
+	</select>
+	
+	<update id="updatePassword" 
+			parameterType="map">
+	
+		UPDATE
+			TBL_ADMIN_MEMBER 
+		SET 
+			A_M_PW = #{encodedPassword}, A_M_MOD_DATE = NOW() 
+		WHERE 
+			A_M_ID = #{a_m_id}
+	
+	</update>
+	
+	<select id="selectAdmins"
+			parameterType="Map"
+			resultType="com.office.seoul.facility.member.MemberDto">
+	
+		SELECT * FROM 
+			TBL_ADMIN_MEMBER WHERE NOT A_M_ROLE = "SUPERADMIN"
+	</select>
+	
+	<update id="updateAdminAccount"
+			parameterType="com.office.seoul.facility.member.MemberDto">
+	
+		UPDATE
+			TBL_ADMIN_MEMBER 
+			SET
+			A_M_APPROVAL = 1
+			WHERE 
+			A_M_NO = #{a_m_no}
+			
+	</update>
+	
+
+</mapper>

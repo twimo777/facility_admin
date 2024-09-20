@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title th:replace="~{include/title.html::title}"></title>
+<link rel="stylesheet" th:href="@{/css/common/common.css}">
+<link rel="stylesheet" th:href="@{/css/common/header_nav_footer.css}">
+<link rel="stylesheet" th:href="@{/css/member/member_modify.css}">
+
+<script th:src="@{/js/member_modify_form.js}"></script>
+</head>
+<body>
+
+    <header th:replace="~{/include/header_nav_footer.html::header}"></header>
+    
+    <nav th:replace="~{/include/header_nav_footer.html::nav}"></nav>
+    
+
+    <section>
+    	<div id="section_wrap">
+    		<h3>정보 수정</h3>
+    	
+	        <div>
+	        	<form th:action="@{/member/member_modify_confirm}" 
+	        			name="member_modify_form" 
+	        			method="post">
+	        		
+	        		<input type="hidden" name="a_m_no" th:value="${loginedMemberDto.a_m_no}">
+	        		<input type="hidden" name="a_m_gender" th:value="${loginedMemberDto.a_m_gender}">
+	        			
+	        		<input type="text" name="a_m_id" th:value="${loginedMemberDto.a_m_id}" readonly><br>
+					<input type="password" name="a_m_pw" th:value="${loginedMemberDto.a_m_pw}" placeholder="비밀번호"><br>
+	        		<input type="text" name="a_m_name" th:value="${loginedMemberDto.a_m_name}" placeholder="이름"><br>
+	        		<select name="a_m_gender" disabled>
+	        			<option value="">성별</option>
+						<option value="M" th:selected="${loginedMemberDto.a_m_gender == 'M'}">남성</option>
+	        			<option value="W" th:selected="${loginedMemberDto.a_m_gender == 'W'}">여성</option>
+	        		</select><br>
+					<input type="email" name="a_m_mail" th:value="${loginedMemberDto.a_m_mail}" placeholder="이메일"><br>
+					<input type="text" name="a_m_phone" th:value="${loginedMemberDto.a_m_phone}" placeholder="휴대폰 번호"><br>
+					<input type="reset" value="초기화">
+					<input type="button" value="정보수정" onclick="MemberModifyForm();">
+	        	</form>
+	        </div>
+			
+			
+			<div>
+				<a th:href="@{/member/member_delete_confirm}">계정삭제</a>
+			</div>
+		</div>
+    </section>
+    
+
+    
+    <footer th:replace="~{/include/header_nav_footer.html::footer}"></footer>
+
+</body>
+</html>

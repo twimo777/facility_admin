@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<script th:replace="~{/include/common_js.html::jquery_cdn}"></script>
+<script th:replace="~{/include/pagination_js.html::js}"></script>
+</head>
+
+<header th:fragment="header">
+	<div id="header_wrap">
+		 <div class="profile">
+
+                 <a th:href="@{/}"> USER |</a> 
+                <a th:href="@{/}"> ADMIN </a>
+
+          </div>
+		
+	</div>
+</header>
+
+
+
+
+	<nav th:fragment="nav">
+        <div id="nav_wrap"> 
+		   <div><ul>
+                <li></li>
+                <li class="logo"> <a th:href="@{/}"><img src="http://ecobus.co.kr/wp-content/uploads/2024project/logo_m.png" alt="logo" width="230px"></a></li>
+                <li class="navigation" >
+                  <div sec:authorize="!isAuthenticated()">
+                    <a th:href="@{/}">HOME</a> &nbsp; |&nbsp; 
+                    <a th:href="@{/member/member_login_form}">관리자로그인</a> &nbsp; |&nbsp; 
+                    <a th:href="@{/member/create_account_form}">계정등록</a> &nbsp; |&nbsp; 
+                   </div>
+                  
+                   <div sec:authorize="isAuthenticated()">
+                    <a th:href="@{/}">HOME</a> &nbsp; |&nbsp; 
+                  
+                     <!-- 슈퍼관리자에게만 보이는 계정 권한 관리 -->
+                     
+  					  <a  sec:authorize="hasRole('SUPERADMIN')" th:href="@{/member/listup_admins}">관리자계정관리&nbsp; |&nbsp; </a>
+					
+                  
+                    <a th:href="@{/member/member_modify_form}">정보수정</a>&nbsp; |&nbsp; 
+                    <a th:href="@{/member/member_modify_form}">통계</a>&nbsp; |&nbsp; 
+                    <a th:href="@{/member/member_logout_confirm}">로그아웃</a>
+                  
+                   </div>
+                </li>
+           </ul>
+          </div> 
+        </div>
+	</nav>
+
+
+ <article th:fragment="article">
+        <div id="article_wrap">
+            <div class="btns">
+                <ul class="btns1">
+                    <li class="soccer" ><a th:href="@{/facility/home(type='축구장')}">축구장</a></li>
+                    <li class="futsal"><a th:href="@{/facility/home(type='풋살장')}">풋살장</a></li>
+	                <li class="foot"><a th:href="@{/facility/home(type='족구장')}">족구장</a></li>
+	                <li class="baseball"><a th:href="@{/facility/home(type='야구장')}">야구장</a></li>
+	                <li class="tennis"><a th:href="@{/facility/home(type='테니스장')}">테니스장</a></li>
+	                <li class="basket"><a  th:href="@{/facility/home(type='농구장')}">농구장</a></li>
+                </ul>
+                <ul class="btns2">    
+	                <li class="volley" ><a th:href="@{/facility/home(type='배구장')}">배구장</a></li>
+                    <li class="multi"><a th:href="@{/facility/home(type='다목적경기장')}">다목적경기장</a></li>
+	                <li class="badminton"><a th:href="@{/facility/home(type='배드민턴장')}">배드민턴장</a></li>
+	                <li class="table"><a th:href="@{/facility/home(type='탁구장')}">탁구장</a></li>
+	                <li class="study"><a th:href="@{/facility/home(type='교육시설')}">교육시설</a></li>
+	                <li class="golf"><a th:href="@{/facility/home(type='골프장')}">골프장</a></li>
+            </ul>
+           </div> 
+     </div>
+     
+     
+
+    </article>
+
+
+	<footer th:fragment="footer">
+        <div id="footer_wrap">
+            © Seoul Metropolitan Government all rights reserved.
+        </div>
+	</footer>
+
+	
+</html>

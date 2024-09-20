@@ -1,0 +1,40 @@
+<script th:fragment="js" th:inline="javascript">
+/*<![CDATA[*/
+let textFromDB = /*[[${facilityDto.DTLCONT}]]*/ 
+/*]]>*/
+
+function openTab(evt, tabName) {
+    var i, tabcontent, tablinks;
+
+    // 모든 탭 콘텐츠 숨기기
+    tabcontent = document.getElementsByClassName("tab-content");
+    for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+    }
+
+    // 모든 탭 버튼에서 'active' 클래스 제거
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+
+    // 선택한 탭 콘텐츠 보이기
+    document.getElementById(tabName).style.display = "block";
+    evt.currentTarget.className += " active";
+}
+
+// 페이지 로드 시 첫 번째 탭을 기본적으로 열기
+window.onload = function() {
+    document.getElementsByClassName("tablinks")[0].click();
+};
+
+
+
+// 텍스트 에어리어 자동 높이 설정
+
+$(document).ready(function() {	
+	let formattedText = textFromDB.replace(/\n/g, "<br>");
+	document.getElementById("output").innerHTML = formattedText;
+
+});
+</script>
