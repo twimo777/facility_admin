@@ -29,16 +29,16 @@
 			        </tr>
 			    </thead>
  			    <tbody>
-	                <tr th:each="reservation : ${reservations}">
-	        
+	                               <tr th:each="reservation : ${reservations}">
+           
                         <td th:text="${reservation.u_m_id}">예약자 이름</td>
                         <td th:each="item: ${facilities}"
-                        	th:if="${item.SVCID eq reservation.SVCID }"
-                        	th:text="${item.SVCNM}">시설이름
+                           th:if="${item.SVCID eq reservation.SVCID }"
+                           th:text="${item.SVCNM}">시설이름
                         </td>
                         <td th:each="item: ${facilities}"
-                        	th:if="${item.SVCID eq reservation.SVCID }"
-                        	th:text="${item.TELNO}">전화번호
+                           th:if="${item.SVCID eq reservation.SVCID }"
+                           th:text="${item.TELNO}">전화번호
                         </td>
                         <td th:text="${reservation.r_reserve_date}">예약 날짜</td>
                         <td th:text="${reservation.r_use_time}">예약 시간</td>

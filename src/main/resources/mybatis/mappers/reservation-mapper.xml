@@ -43,9 +43,11 @@
 	<!-- 모든 예약 정보 조회 -->
 	<select id="findAllReservations" resultType="com.office.seoul.facility.reservation.ReservationDto">
         
-        SELECT * FROM 
-        	TBL_RESERVE_INFO
-		ORDER BY R_RESERVE_DATE DESC
+             SELECT * FROM 
+           TBL_RESERVE_INFO R 
+        JOIN TBL_FACILITY F
+        ON R.SVCID = F.SVCID
+      ORDER BY R_RESERVE_DATE DESC
 
     </select>
      

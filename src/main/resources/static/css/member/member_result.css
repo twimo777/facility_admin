@@ -25,6 +25,7 @@ section #section_wrap .message p {
     font-size: 1.2em;
     font-weight: bold;
     margin-bottom: 30px;
+     text-align: center;
 }
 
 .success-message {
@@ -33,6 +34,8 @@ section #section_wrap .message p {
 
 .error-message {
     color: #F44336; 
+    font-size: 1.1em;
+    font-weight: bold;
 }
 
 /* 버튼 스타일 */
