@@ -49,5 +49,18 @@
 
     </select>
      
+     <update id="updateReservationStatus"
+			parameterType="com.office.seoul.facility.reservation.ReservationDto">
+	
+		UPDATE
+			TBL_RESERVE_INFO 
+			SET
+			R_USE_STATE = "예약"
+			WHERE 
+			R_NO = #{r_no}
+			
+	</update>
+     
+     
 
 </mapper>

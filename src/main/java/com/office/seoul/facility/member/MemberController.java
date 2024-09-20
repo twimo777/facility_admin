@@ -247,14 +247,14 @@ public class MemberController {
 		
 	}
 	
-	@GetMapping("/set_reservation_approval")
-	public String setReservationApproval(Model model) {
-		log.info("setReservationApproval()");
+	@GetMapping("/listup_reservations")
+	public String listupReservations(Model model) {
+		log.info("listupReservations()");
 		
 		String nextPage= "member/listup_reservations";
 		
 		
-		List<ReservationDto> reservationDtos = reservationService.setReservationApproval();
+		List<ReservationDto> reservationDtos = reservationService.listupReservations();
 		List<FacilityDto> facilityDtos = facilityService.getAllFacilities();
 		
 		model.addAttribute("reservations", reservationDtos);
@@ -267,7 +267,17 @@ public class MemberController {
 	}
 	
 	
-	
+	@GetMapping("/set_reservation_approval")
+	public String setReservationApproval(@RequestParam("r_no") int r_no) {
+		log.info("setReservationApproval()");
+		
+		String nextPage= "redirect:/member/listup_reservations";
+		
+		reservationService.setReservationApproval(r_no);
+		
+		return nextPage;
+		
+	}
 	
 	
 	

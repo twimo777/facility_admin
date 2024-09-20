@@ -20,4 +20,6 @@ public interface IReservationDao {
 
 	List<ReservationDto> findAllReservations();
 
+	int updateReservationStatus(int r_no);
+
 }

@@ -45,9 +45,7 @@
                         <td th:text="${reservation.r_use_state}">예약 상태</td>
                         <td>
                         <th:block th:if="${reservation.r_use_state eq '예약대기'}">
-                        <button class="cancel_reservation"
-                                    th:data-reservation-id ="${reservation.r_use_state}">승인</button>
-                        
+                        <a th:href="@{/member/set_reservation_approval(r_no=${reservation.r_no})}">승인</a>
                         </th:block>
                         </td>
                     </tr>

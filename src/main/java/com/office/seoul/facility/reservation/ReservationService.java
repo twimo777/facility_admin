@@ -79,9 +79,23 @@ public class ReservationService {
 		return iReservationDao.findReservationsByMemberId(u_m_id);
 	}
 
-	public List<ReservationDto>  setReservationApproval() {
+	public List<ReservationDto>  listupReservations() {
 		log.info("setReservationApproval()");
 		return iReservationDao.findAllReservations();
+		
+	}
+
+	public void setReservationApproval(int r_no) {
+		log.info("setReservationApproval()");
+	
+		int result = iReservationDao.updateReservationStatus(r_no);
+		if (result > 0) {
+			log.info(r_no + " APPROVAL SUCCESS!!");
+			
+		} else {
+			log.info(r_no + " APPROVAL FAIL!!");
+			
+		}
 		
 	}
 
