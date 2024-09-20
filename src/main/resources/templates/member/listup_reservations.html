@@ -6,6 +6,7 @@
 <link rel="stylesheet" th:href="@{/css/common/common.css}">
 <link rel="stylesheet" th:href="@{/css/common/header_nav_footer.css}">
 <link rel="stylesheet" th:href="@{/css/member/list.css}">
+
 </head>
 <body>
 
@@ -15,43 +16,46 @@
 
     <section>
     	<div id="section_wrap">
-    		<h2>전체 예약 리스트</h2><br>
-			<table>
-			    <thead>
-			        <tr>
-			            <th>예약자 이름</th>
-			            <th>시설 이름</th>
-			            <th>시설전화번호</th>
-			            <th>예약 날짜</th>
-			            <th>예약 시간</th>
-			            <th>예약 상태</th>
-			            <th>승인여부</th>
-			        </tr>
-			    </thead>
- 			    <tbody>
-	                <tr th:each="reservation : ${reservations}">
-	        
-                        <td th:text="${reservation.u_m_id}">예약자 이름</td>
-                        <td th:each="item: ${facilities}"
-                        	th:if="${item.SVCID eq reservation.SVCID }"
-                        	th:text="${item.SVCNM}">시설이름
-                        </td>
-                        <td th:each="item: ${facilities}"
-                        	th:if="${item.SVCID eq reservation.SVCID }"
-                        	th:text="${item.TELNO}">전화번호
-                        </td>
-                        <td th:text="${reservation.r_reserve_date}">예약 날짜</td>
-                        <td th:text="${reservation.r_use_time}">예약 시간</td>
-                        <td th:text="${reservation.r_use_state}">예약 상태</td>
-                        <td>
-                        <th:block th:if="${reservation.r_use_state eq '예약대기'}">
-                        <a th:href="@{/member/set_reservation_approval(r_no=${reservation.r_no})}">승인</a>
-                        </th:block>
-                        </td>
-                    </tr>
-			    </tbody>
-			</table>
-    	</div>
+		    <h2>전체 예약 리스트</h2><br>
+		    <div id="reservationsContainer">
+		        <table>
+		            <thead>
+		                <tr>
+		                    <th>예약자 이름</th>
+		                    <th>시설 이름</th>
+		                    <th>시설전화번호</th>
+		                    <th>예약 날짜</th>
+		                    <th>예약 시간</th>
+		                    <th>예약 상태</th>
+		                    <th>승인여부</th>
+		                </tr>
+		            </thead>
+		            <tbody>
+		                <tr th:each="reservation : ${reservations}">
+		                    <td th:text="${reservation.u_m_id}">예약자 이름</td>
+		                    <td th:each="item : ${facilities}" th:if="${item.SVCID eq reservation.SVCID}" th:text="${item.SVCNM}">시설 이름</td>
+		                    <td th:each="item : ${facilities}" th:if="${item.SVCID eq reservation.SVCID}" th:text="${item.TELNO}">전화번호</td>
+		                    <td th:text="${reservation.r_reserve_date}">예약 날짜</td>
+		                    <td th:text="${reservation.r_use_time}">예약 시간</td>
+		                    <td th:text="${reservation.r_use_state}">예약 상태</td>
+		                    <td>
+		                        <th:block th:if="${reservation.r_use_state eq '예약대기'}">
+		                            <a th:href="@{/member/set_reservation_approval(r_no=${reservation.r_no})}">승인</a>
+		                        </th:block>
+		                    </td>
+		                </tr>
+		            </tbody>
+		        </table>
+		    </div>
+		    
+		    <!-- 페이지네이션 -->
+		    <div class="pagination">
+		        <a th:if="${currentPage > 1}" th:href="@{/member/listup_reservations(page=${currentPage - 1}, size=${size})}">이전</a>
+		        <span th:text="${currentPage}">현재 페이지</span> / <span th:text="${totalPages}">총 페이지</span>
+		        <a th:if="${currentPage < totalPages}" th:href="@{/member/listup_reservations(page=${currentPage + 1}, size=${size})}">다음</a>
+		    </div>
+		    
+		</div>
     </section>
 
     <footer th:replace="~{/include/header_nav_footer.html::footer}"></footer>

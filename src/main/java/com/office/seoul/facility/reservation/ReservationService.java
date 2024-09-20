@@ -79,10 +79,11 @@ public class ReservationService {
 		return iReservationDao.findReservationsByMemberId(u_m_id);
 	}
 
-	public List<ReservationDto>  listupReservations() {
-		log.info("setReservationApproval()");
-		return iReservationDao.findAllReservations();
-		
+	public List<ReservationDto> listupReservations(int page, int size) {
+	    log.info("listupReservations() with page: {}, size: {}", page, size);
+	    
+	    int offset = (page - 1) * size; // 오프셋 계산
+	    return iReservationDao.findAllReservations(offset, size);
 	}
 
 	public void setReservationApproval(int r_no) {
@@ -97,6 +98,12 @@ public class ReservationService {
 			
 		}
 		
+	}
+
+	// 예약 수 세기
+	public int countReservations() {
+	    log.info("countReservations()");
+	    return iReservationDao.countAllReservations(); // DAO에서 전체 예약 수를 가져오는 메서드 호출
 	}
 
 }

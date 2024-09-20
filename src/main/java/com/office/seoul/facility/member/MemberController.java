@@ -2,8 +2,6 @@ package com.office.seoul.facility.member;
 
 import java.security.Principal;
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,7 +9,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.office.seoul.facility.FacilityDto;
 import com.office.seoul.facility.FacilityService;
@@ -247,23 +244,29 @@ public class MemberController {
 		
 	}
 	
+	// 전체 예약 리스트
 	@GetMapping("/listup_reservations")
-	public String listupReservations(Model model) {
-		log.info("listupReservations()");
-		
-		String nextPage= "member/listup_reservations";
-		
-		
-		List<ReservationDto> reservationDtos = reservationService.listupReservations();
-		List<FacilityDto> facilityDtos = facilityService.getAllFacilities();
-		
-		model.addAttribute("reservations", reservationDtos);
-		model.addAttribute("facilities", facilityDtos);
-		
-	 	
-		
-		return nextPage;
-		
+	public String listupReservations(
+	        @RequestParam(value = "page", defaultValue = "1") int page,
+	        @RequestParam(value = "size", defaultValue = "10") int size,
+	        Model model) {
+	    
+	    log.info("listupReservations(), page: {}, size: {}", page, size);
+	    
+	    String nextPage = "member/listup_reservations";
+	    
+	    // 전체 예약 수 가져오기
+	    int totalReservations = reservationService.countReservations();
+	    List<ReservationDto> reservationDtos = reservationService.listupReservations(page, size);
+	    List<FacilityDto> facilityDtos = facilityService.getAllFacilities();
+
+	    model.addAttribute("reservations", reservationDtos);
+	    model.addAttribute("facilities", facilityDtos);
+	    model.addAttribute("totalReservations", totalReservations);
+	    model.addAttribute("currentPage", page);
+	    model.addAttribute("totalPages", (int) Math.ceil((double) totalReservations / size));
+	    
+	    return nextPage;
 	}
 	
 	
@@ -278,12 +281,6 @@ public class MemberController {
 		return nextPage;
 		
 	}
-	
-	
-	
-	
-	
-	
 	
 	
 }

@@ -18,8 +18,10 @@ public interface IReservationDao {
 
 	List<ReservationDto> findReservationsByMemberId(@Param("u_m_id") String u_m_id);
 
-	List<ReservationDto> findAllReservations();
+	List<ReservationDto> findAllReservations(@Param("offset") int offset, @Param("size") int size);
 
 	int updateReservationStatus(int r_no);
+
+	int countAllReservations();
 
 }
