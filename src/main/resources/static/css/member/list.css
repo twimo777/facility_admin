@@ -42,6 +42,27 @@ section #section_wrap table td a {
 }
 
 
+/* 길어지면 줄 바꿈 */
+section #section_wrap table tr td span {
+   width: 200px;
+   padding: 0 5px;
+   float: right;
+   display: inline-block;
+   line-height: 1.9em;
+	
+}
+
+section #section_wrap table tr td span .line1 {
+   
+   line-height: 3.7em;
+}
+
+section #section_wrap table td:nth-child(2){
+	width: 350px;
+}
+section #section_wrap table td:nth-child(3){
+	width: 230px;
+}
 
 
 

@@ -5,7 +5,7 @@
 <title th:replace="~{include/title.html::title}"></title>
 <link rel="stylesheet" th:href="@{/css/common/common.css}">
 <link rel="stylesheet" th:href="@{/css/common/header_nav_footer.css}">
-<link rel="stylesheet" th:href="@{/css/member/login.css}">
+<link rel="stylesheet" th:href="@{/css/member/member_result.css}">
 
 <script th:src="@{/js/member_login_form.js}"></script>
 </head>
@@ -16,12 +16,15 @@
     <nav th:replace="~{/include/header_nav_footer.html::nav}"></nav>
 
     <section>
-    	<div>
-    		<p>로그인 실패</p>
-    	</div>
-    	<div>
-			<a th:href="@{/member/member_login_form}">로그인 화면으로 이동</a>
-            <a th:href="@{/member/create_account_form}">다시 회원 가입하기</a>
+    	<div id="section_wrap">
+    		<div class="message">
+    		<p class="error-message">로그인 실패</p>
+    		</div>
+    		<div class="go_button">
+    		 <br><br>
+			<a th:href="@{/member/member_login_form}" class="button">로그인 화면으로 이동</a>
+            <a th:href="@{/member/create_account_form}" class="button">계정등록</a>
+		</div>
 		</div>
     </section>
     

@@ -17,8 +17,8 @@
 
     <section>
     	<div id="section_wrap">
-    		<p th:if="${isModify}">정보수정 성공</p>
-            <p th:if="${!isModify}">정보수정 실패</p>
+    		<p th:if="${isModify}" class="success-message">정보수정 성공</p>
+            <p th:if="${!isModify}" class="error-message">정보수정 실패</p>
     	</div>
 
 
