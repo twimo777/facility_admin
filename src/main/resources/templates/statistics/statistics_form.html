@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title th:replace="~{include/title.html::title}"></title>
+<link rel="stylesheet" th:href="@{/css/common/common.css}">
+<link rel="stylesheet" th:href="@{/css/common/header_nav_footer.css}">
+<link rel="stylesheet" th:href="@{/css/statistics/statistics.css}">
+
+<script th:replace="~{/include/common_js.html::jquery_cdn}"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script th:src="@{/js/statistics.js}"></script>
+</head>
+<body>
+
+    <header th:replace="~{/include/header_nav_footer.html::header}"></header>
+    
+    <nav th:replace="~{/include/header_nav_footer.html::nav}"></nav>
+    
+    <section>
+        <div class="tab">
+            <button class="tablinks" onclick="openTab(event, 'Yearly')">년별 이용률</button>
+            <button class="tablinks" onclick="openTab(event, 'Monthly')">월별 이용률</button>
+            <button class="tablinks" onclick="openTab(event, 'Facility')">시설별 이용률</button>
+        </div>
+        
+        <div id="Yearly" class="tab-content">
+            <h4>년별 이용률</h4>
+            <div class="chart-container">
+                <canvas id="yearlyChart"></canvas>
+            </div>
+        </div>
+        
+        <div id="Monthly" class="tab-content" style="display:none;">
+            <h4>월별 이용률</h4>
+            <div class="chart-container">
+                <canvas id="monthlyChart"></canvas>
+            </div>
+        </div>
+        
+        <div id="Facility" class="tab-content" style="display:none;">
+            <h4>시설별 이용률</h4>
+            <div class="chart-container">
+                <canvas id="facilityChart"></canvas>
+            </div>
+        </div>
+    </section>
+
+    <footer th:replace="~{/include/header_nav_footer.html::footer}"></footer>
+
+</body>
+</html>

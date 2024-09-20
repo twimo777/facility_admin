@@ -62,10 +62,36 @@
 			R_NO = #{r_no}
 			
 	</update>
-     
+    
+    <!-- 전체 예약수 세기 --> 
     <select id="countAllReservations" resultType="int">
-	    SELECT COUNT(*) FROM TBL_RESERVE_INFO
+	    SELECT COUNT(*) FROM TBL_RESERVE_INFO R 
+	    JOIN TBL_FACILITY F
+	    ON R.SVCID = F.SVCID
 	</select>
-     
+	
+	<!-- 월별 통계 -->
+	<select id="getMonthlyStatistics" resultType="Map">
+        SELECT DATE_FORMAT(r.r_reserve_date, '%Y-%m') AS month, COUNT(r.r_no) AS count
+        FROM TBL_RESERVE_INFO r
+        GROUP BY month
+        ORDER BY month;
+    </select>
+    
+    <!-- 시설별 통계  -->
+    <select id="getFacilityStatistics" resultType="Map">
+        SELECT f.MINCLASSNM, COUNT(r.r_no) AS count
+        FROM TBL_RESERVE_INFO r
+        JOIN TBL_FACILITY f ON r.SVCID = f.SVCID
+        GROUP BY f.MINCLASSNM
+    </select>
+    
+    <!-- 년별 통계 -->
+	<select id="getYearlyStatistics" resultType="Map">
+	    SELECT DATE_FORMAT(r.r_reserve_date, '%Y') AS year, COUNT(r.r_no) AS count
+	    FROM TBL_RESERVE_INFO r
+	    GROUP BY year
+	    ORDER BY year;
+	</select>
 
 </mapper>

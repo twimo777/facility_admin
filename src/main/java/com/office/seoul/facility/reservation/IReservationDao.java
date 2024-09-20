@@ -24,4 +24,10 @@ public interface IReservationDao {
 
 	int countAllReservations();
 
+	List<Map<String, Object>> getMonthlyStatistics();
+
+	List<Map<String, Object>> getFacilityStatistics();
+
+	List<Map<String, Object>> getYearlyStatistics();
+
 }

@@ -82,7 +82,7 @@ public class ReservationService {
 	public List<ReservationDto> listupReservations(int page, int size) {
 	    log.info("listupReservations() with page: {}, size: {}", page, size);
 	    
-	    int offset = (page - 1) * size; // 오프셋 계산
+	    int offset = (page - 1) * size;
 	    return iReservationDao.findAllReservations(offset, size);
 	}
 
@@ -103,7 +103,26 @@ public class ReservationService {
 	// 예약 수 세기
 	public int countReservations() {
 	    log.info("countReservations()");
-	    return iReservationDao.countAllReservations(); // DAO에서 전체 예약 수를 가져오는 메서드 호출
+	    return iReservationDao.countAllReservations();
 	}
+
+	// 월별 통계 
+	public List<Map<String, Object>> getMonthlyStatistics() {
+		
+		return iReservationDao.getMonthlyStatistics();
+	}
+
+	// 년별 통계
+	public List<Map<String, Object>> getYearlyStatistics() {
+		
+		return iReservationDao.getYearlyStatistics();
+	}
+
+	// 시설별 통계 
+	public List<Map<String, Object>> getFacilityStatistics() {
+		
+		return iReservationDao.getFacilityStatistics();
+	}
+
 
 }
