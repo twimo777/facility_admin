@@ -30,7 +30,7 @@
                   <div sec:authorize="!isAuthenticated()">
                     <a th:href="@{/}">HOME</a> &nbsp; |&nbsp; 
                     <a th:href="@{/member/member_login_form}">관리자로그인</a> &nbsp; |&nbsp; 
-                    <a th:href="@{/member/create_account_form}">계정생성</a> &nbsp; |&nbsp; 
+                    <a th:href="@{/member/create_account_form}">계정생성</a>
                    </div>
                   
                    <div sec:authorize="isAuthenticated()">
