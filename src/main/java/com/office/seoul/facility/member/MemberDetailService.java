@@ -25,6 +25,11 @@ public class MemberDetailService implements UserDetailsService {
 		MemberDto selectedMemberDto = 
 				iMemberDao.selectMemberByMId(username);
 		
+		
+		 if (selectedMemberDto.getA_m_approval() == 0) {
+	            throw new UsernameNotFoundException("관리자 승인 대기중입니다.");
+		 }
+		
 		if (selectedMemberDto != null) {
 			log.info("getA_m_role : {}", selectedMemberDto.getA_m_role());
 			return User.builder()
@@ -34,12 +39,12 @@ public class MemberDetailService implements UserDetailsService {
 					.build();
 			
 		}
-		
+		 	 
 		return null;
-		
+		 
 	}
 	
-
+	
 }
 
 

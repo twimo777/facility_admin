@@ -21,7 +21,7 @@ section #section_wrap {
 }
 
 /* 메시지 스타일 */
-section #section_wrap .message p {
+section #section_wrap  p {
     font-size: 1.2em;
     font-weight: bold;
     margin-bottom: 30px;

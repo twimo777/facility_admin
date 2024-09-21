@@ -41,23 +41,6 @@ section #section_wrap table td a {
 
 }
 
-section #section_wrap table tbody td:nth-child(1) {
-	width: 200px;
-}
-section #section_wrap table tbody td:nth-child(2) {
-	width: 200px;
-}
-section #section_wrap table tbody td:nth-child(3) {
-	width: 60px;
-}
-section #section_wrap table tbody td:nth-child(5) {
-	width: 190px;
-}
-section #section_wrap table tbody td:nth-child(6) {
-	width: 100px;
-	text-align: center;
-}
-
 
 
 
