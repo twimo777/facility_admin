@@ -1,6 +1,6 @@
  section {
     width: 100%;
-    min-height: 700px;
+    min-height: 80vh; 
       background-image: url("http://ecobus.co.kr/wp-content/uploads/2024project/admin_home.jpg") ;
 	background-size: cover;
 	background-position: center;

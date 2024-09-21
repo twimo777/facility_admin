@@ -1,6 +1,7 @@
 /* 통계 css */
 section {
     padding: 20px; 
+    min-height: 70%; 
 }
 
 /* 탭 버튼 스타일 */

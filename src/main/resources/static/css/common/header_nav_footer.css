@@ -61,6 +61,8 @@ nav #nav_wrap a {
 
  footer {
 
+ 	bottom: 0;
+	
 	width: 100%;
 	padding: 10px 0;
 	background-color: #363636;

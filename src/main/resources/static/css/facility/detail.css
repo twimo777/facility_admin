@@ -3,6 +3,7 @@
  section {
     width: 100%;
    padding: 10px 0;
+   min-height: 80%; 
 } 
  
 

@@ -1,12 +1,12 @@
 /* 전체 섹션 스타일 */
 section {
     width: 100%;
-    min-height: 60vh; 
+    min-height: 80vh; 
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: #f4f4f9; 
-    padding: 40px 0;
+    padding: 20px 0;
 }
 
 section #section_wrap {
