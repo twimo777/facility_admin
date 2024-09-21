@@ -35,8 +35,8 @@ section #section_wrap table td {
 section #section_wrap table td a {
 	display: inline-block;
 	padding: 5px 10px;
-	background-color:#dadada;
-	border: 1px solid #dadada;
+	background-color:rgb(197, 239, 201);
+	border: 1px solid rgb(197, 239, 201);
 	border-radius: 5px;
 
 }

@@ -243,6 +243,18 @@ public class MemberController {
 		return nextPage;
 		
 	}
+
+	@GetMapping("/cancel_admin_approval")
+	public String cancelAdminApproval(@RequestParam("a_m_no") int a_m_no) {
+		log.info("cancelAdminApproval()");
+		
+		String nextPage= "redirect:/member/listup_admins";
+		
+		memberService.cancelAdminApproval(a_m_no);
+		
+		return nextPage;
+		
+	}
 	
 	// 전체 예약 리스트
 	@GetMapping("/listup_reservations")

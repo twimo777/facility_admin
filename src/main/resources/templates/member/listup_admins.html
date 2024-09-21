@@ -25,7 +25,8 @@
 							<th>성별</th>
 							<th>이메일</th>
 							<th>휴대전화</th>
-							<th>승인</th>
+							<th>승인 여부</th>
+							<th>상태 변경</th>
 						</tr>
 					</thead>
   				<tbody>
@@ -37,11 +38,17 @@
                         <td th:text="${item.a_m_phone}"></td>
                         <td>
                             <div th:switch="${item.a_m_approval}">
-                                <a th:href="@{/member/set_admin_approval(a_m_no=${item.a_m_no})}"
-                                   th:case="0">승인처리</a>
-                                <span th:case="1">승인완료</span>
+                                <span th:case="0">승인대기</span>
+                                <span class="approval" th:case="1">승인완료</span>
+		  			        </div>
+  			      </td>
+                        <td>
+                       
+                                <a th:href="@{/member/set_admin_approval(a_m_no=${item.a_m_no})}">승인</a>
+                                <a th:href="@{/member/cancel_admin_approval(a_m_no=${item.a_m_no})}">취소</a>
+                                   
+              
   
-  			        </div>
   			      </td>
   			    </tr>
   			  </tbody>

@@ -33,32 +33,41 @@ section #section_wrap table td {
 		padding: 10px;
 }
 section #section_wrap table td a {
-	display: inline-block;
+
 	padding: 5px 10px;
-	background-color:#dadada;
-	border: 1px solid #dadada;
+	background-color:rgb(197, 239, 201);
+	border: 1px solid rgb(197, 239, 201);
 	border-radius: 5px;
 
 }
 
+section #section_wrap table td a:last-child {
+	
+	background-color:#ffaaaa;
+	border: 1px solid #ffaaaa;
+}
+
 section #section_wrap table tbody td:nth-child(1) {
-	width: 200px;
+	width: 100px;
 }
 section #section_wrap table tbody td:nth-child(2) {
-	width: 200px;
+	width: 100px;
 }
 section #section_wrap table tbody td:nth-child(3) {
 	width: 60px;
 }
 section #section_wrap table tbody td:nth-child(5) {
-	width: 190px;
+	width: 150px;
 }
 section #section_wrap table tbody td:nth-child(6) {
-	width: 100px;
+	width: 50px;
 	text-align: center;
 }
 
-
+section #section_wrap table tbody td:nth-child(6) .approval {
+    font-weight: bold;
+    color: #008000;
+}
 
 
 /* 길어지면 줄 바꿈 */

@@ -33,4 +33,6 @@ public interface IMemberDao {
 
 	public int updateAdminAccount(int a_m_no);
 
+	public int cancelAdminApproval(int a_m_no);
+
 }

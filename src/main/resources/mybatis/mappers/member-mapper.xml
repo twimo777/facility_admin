@@ -112,7 +112,8 @@
 			resultType="com.office.seoul.facility.member.MemberDto">
 	
 		SELECT * FROM 
-			TBL_ADMIN_MEMBER WHERE NOT A_M_ROLE = "SUPERADMIN"
+			TBL_ADMIN_MEMBER WHERE NOT A_M_ROLE = "SUPERADMIN" 
+			ORDER BY A_M_REG_DATE DESC
 	</select>
 	
 	<update id="updateAdminAccount"
@@ -127,5 +128,16 @@
 			
 	</update>
 	
+	<update id="cancelAdminApproval"
+			parameterType="com.office.seoul.facility.member.MemberDto">
+	
+		UPDATE
+			TBL_ADMIN_MEMBER 
+			SET
+			A_M_APPROVAL = 0
+			WHERE 
+			A_M_NO = #{a_m_no}
+			
+	</update>
 
 </mapper>

@@ -193,5 +193,17 @@ public class MemberService {
 		
 	}
 
+	public void cancelAdminApproval(int a_m_no) {
+		log.info("cancelAdminApproval()");
+		int result = iMemberDao.cancelAdminApproval(a_m_no);
+		if (result > 0) {
+			log.info(a_m_no + " CANCEL APPROVAL SUCCESS!!");
+			
+		} else {
+			log.info(a_m_no + " CANCEL APPROVAL FAIL!!");
+			
+		}
+	}
+
 	
 }
