@@ -46,7 +46,7 @@
         SELECT * FROM TBL_RESERVE_INFO R
         JOIN TBL_FACILITY F
         ON R.SVCID = F.SVCID
-	    ORDER BY R_RESERVE_DATE DESC 
+	    ORDER BY R_REG_DATE DESC 
 	    LIMIT #{size} OFFSET #{offset}
 
     </select>
