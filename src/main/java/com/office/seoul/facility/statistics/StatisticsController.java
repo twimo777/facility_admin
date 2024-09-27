@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -55,5 +56,13 @@ public class StatisticsController {
 	    log.info("getFacilityStatistics()");
 	    return reservationService.getFacilityStatistics();
 	}
+	
+	// 특정 년도의 월별 통계
+    @GetMapping("/monthly_statistics/{year}")
+    @ResponseBody
+    public List<Map<String, Object>> getMonthlyStatisticsByYear(@PathVariable("year") int year) {
+        log.info("getMonthlyStatisticsByYear(year={})", year);
+        return reservationService.getMonthlyStatisticsByYear(year);
+    }
 
 }

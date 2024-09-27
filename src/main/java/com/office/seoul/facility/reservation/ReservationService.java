@@ -123,6 +123,10 @@ public class ReservationService {
 		
 		return iReservationDao.getFacilityStatistics();
 	}
-
+	
+	// 옵션
+	public List<Map<String, Object>> getMonthlyStatisticsByYear(int year) {
+	    return iReservationDao.getMonthlyStatisticsByYear(year);
+	}
 
 }

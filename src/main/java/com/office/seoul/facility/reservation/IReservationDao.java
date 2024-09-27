@@ -29,5 +29,7 @@ public interface IReservationDao {
 	List<Map<String, Object>> getFacilityStatistics();
 
 	List<Map<String, Object>> getYearlyStatistics();
+	
+	List<Map<String, Object>> getMonthlyStatisticsByYear(@Param("year") int year);
 
 }

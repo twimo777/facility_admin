@@ -1,10 +1,17 @@
 $(document).ready(function() {
     let yearlyChart, monthlyChart, facilityChart;
 
-	// 귀찮아서 아작스말고 에이싱크로
-    async function fetchMonthlyStatistics() {
-        const response = await fetch('/statistics/monthly_statistics');
-        return await response.json();
+    // 귀찮아서 아작스말고 에이싱크로
+    async function fetchMonthlyStatistics(year) {
+        console.log(`Fetching monthly statistics for year: ${year}`);
+        const response = await fetch(`/statistics/monthly_statistics/${year}`);
+        if (!response.ok) {
+            console.error("Failed to fetch monthly statistics:", response.status);
+            return [];
+        }
+        const data = await response.json();
+        console.log("Monthly data:", data); // 데이터 확인
+        return data;
     }
 
     async function fetchYearlyStatistics() {
@@ -30,10 +37,10 @@ $(document).ready(function() {
         }
     }
 
-    async function renderCharts() {
+    async function renderCharts(year) { // year 인자를 추가
         destroyCharts(); // 기존 차트 파괴
 
-        const monthlyData = await fetchMonthlyStatistics();
+        const monthlyData = await fetchMonthlyStatistics(year); // year 전달
         const yearlyData = await fetchYearlyStatistics();
         const facilityData = await fetchFacilityStatistics();
 
@@ -46,6 +53,8 @@ $(document).ready(function() {
         const yearlyCounts = yearlyData.map(item => item.count);
         const facilityNames = facilityData.map(item => item.MINCLASSNM);
         const facilityCounts = facilityData.map(item => item.count);
+		
+		
 
         // 시설별 색상 배열 총 13가지
         const facilityColors = [
@@ -77,7 +86,8 @@ $(document).ready(function() {
             },
             options: {
                 scales: {
-                    y: { beginAtZero: true, title: { display: true, text: '예약 수' }},
+                    y: { beginAtZero: true, title: { display: true, text: '예약 수' },
+					ticks: {stepSize: 5}},
                     x: { title: { display: true, text: '월' }}
                 }
             }
@@ -132,6 +142,37 @@ $(document).ready(function() {
             }
         });
     }
+	
+	// 년도 선택 드롭다운 초기화
+	function initYearSelector() {
+	    const currentYear = new Date().getFullYear();
+	    const yearSelector = document.getElementById('yearSelector');
+	    
+	    // 드롭다운 초기화
+	    yearSelector.innerHTML = '';
+
+	    // 현재 년도에서 10년 전까지의 년도 추가
+	    for (let year = currentYear; year >= currentYear - 10; year--) {
+	        const option = document.createElement('option');
+	        option.value = year;
+	        option.textContent = year;
+	        yearSelector.appendChild(option);
+	    }
+
+	    // 드롭다운 기본 선택 설정
+	    yearSelector.value = currentYear; // 현재 연도로 초기 설정
+
+	    // 초기 차트 랜더링
+	    renderCharts(currentYear); // 현재 년도 선택하여 차트 렌더링
+	}
+
+	// 년도 선택 시 차트 업데이트
+	document.getElementById('yearSelector').addEventListener('change', function() {
+	    const selectedYear = this.value; // 선택된 연도 가져오기
+	    if (selectedYear) {
+	        renderCharts(selectedYear); // 연도가 유효한 경우에만 호출
+	    }
+	});
 
     // 탭 전환 함수
     window.openTab = function(evt, tabName) {
@@ -148,7 +189,12 @@ $(document).ready(function() {
         document.getElementById(tabName).style.display = "block"; // 선택한 탭 표시
         evt.currentTarget.className += " active"; 
 
-        renderCharts();
+		// 연도 드롭다운 초기화와 차트 렌더링
+        if (tabName === 'Monthly') {
+            initYearSelector();
+        } else {
+            renderCharts(new Date().getFullYear()); // 기본 차트 렌더링
+        }
     };
 
     // 초기 탭 열기

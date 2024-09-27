@@ -94,5 +94,14 @@
 	    GROUP BY year
 	    ORDER BY year;
 	</select>
+	
+	<!-- 년별 통계 -->
+	<select id="getMonthlyStatisticsByYear" resultType="Map">
+	    SELECT DATE_FORMAT(r.r_reserve_date, '%Y-%m') AS month, COUNT(r.r_no) AS count
+	    FROM TBL_RESERVE_INFO r
+	    WHERE YEAR(r.r_reserve_date) = #{year}
+	    GROUP BY month
+	    ORDER BY month;
+	</select>
 
 </mapper>
