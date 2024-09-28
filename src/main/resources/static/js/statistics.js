@@ -197,6 +197,24 @@ $(document).ready(function() {
         }
     };
 
+	
+	// PDF 다운로드 함수
+	window.downloadPdf = function() {
+		window.jsPDF = window.jspdf.jsPDF
+		const fileName = document.querySelector('.tablinks.active').innerText;
+		const element = document.querySelector('body'); // Get the HTML element to be converted to PDF
+		html2canvas(element).then(canvas => {
+			const imgData = canvas.toDataURL('image/png'); // Convert canvas to image data
+			const pdf = new jsPDF(); // Initialize jsPDF
+			const imgProps = pdf.getImageProperties(imgData);
+			const pdfWidth = pdf.internal.pageSize.getWidth();
+			const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+			pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight); // Add image to PDF
+			pdf.save(`seoul-facility-report-${fileName}.pdf`); // Save PDF
+		});
+	};
+	
+	
     // 초기 탭 열기
     document.querySelector(".tablinks").click();
 });

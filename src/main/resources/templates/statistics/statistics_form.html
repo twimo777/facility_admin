@@ -10,6 +10,10 @@
 <script th:replace="~{/include/common_js.html::jquery_cdn}"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script th:src="@{/js/statistics.js}"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
 </head>
 <body>
 
@@ -22,6 +26,7 @@
             <button class="tablinks" onclick="openTab(event, 'Yearly')">년별 이용률</button>
             <button class="tablinks" onclick="openTab(event, 'Monthly')">월별 이용률</button>
             <button class="tablinks" onclick="openTab(event, 'Facility')">시설별 이용률</button>
+            <button class="tablinks" onclick="downloadPdf()">PDF다운로드</button>
         </div>
         
         <div id="Yearly" class="tab-content">
