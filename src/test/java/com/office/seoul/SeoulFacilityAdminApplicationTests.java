@@ -1,10 +1,10 @@
-package com.office.api;
+package com.office.seoul;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class ApiApplicationTests {
+class SeoulFacilityAdminApplicationTests {
 
 	@Test
 	void contextLoads() {
